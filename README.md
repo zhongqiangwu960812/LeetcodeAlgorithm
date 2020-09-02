@@ -4,7 +4,7 @@
 
 # 目录大纲：
 
-1. 数组、链表和跳表
+1. [数组、链表和跳表](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class1_ArrayAndLinked)
 2. 栈和队列(优先队列， 双端队列)
 3. 哈希表、映射和集合
 4. 树、二叉树、二叉搜索树
