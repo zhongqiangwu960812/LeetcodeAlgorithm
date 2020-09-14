@@ -7,7 +7,7 @@
 
 1. [数组、链表和跳表](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class1_ArrayAndLinked)
 2. [栈和队列(优先队列， 双端队列)](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class2_StackAndQueue)
-3. 哈希表、映射和集合
+3.[ 哈希表、映射和集合](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class3_Hash_Map_Collections)
 4. 树、二叉树、二叉搜索树
 5. 泛型递归、树的递归
 6. 分治和回溯
