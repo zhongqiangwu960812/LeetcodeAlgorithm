@@ -105,7 +105,7 @@
 * [中文题解](https://leetcode-cn.com/problems/sliding-window-maximum/solution/)
 * [国际站](https://leetcode.com/problems/sliding-window-maximum/discuss/65901/9-lines-Ruby-11-lines-Python-O(n))
 
-## 6. [设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque/)(中等)
+## 2. [设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque/)(中等)
 
 这个没有啥技术含量， 直接列表操作即可：
 
