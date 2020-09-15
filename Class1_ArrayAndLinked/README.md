@@ -72,3 +72,27 @@
    * [https://leetcode-cn.com/problems/lru-cache](https://leetcode-cn.com/problems/lru-cache)
    * [https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html](https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html)
    * [https://www.zhihu.com/question/20202931](https://www.zhihu.com/question/20202931)
+
+# 做过的题目梳理
+
+链表部分：
+
+* 反转链表(简单)
+* 两两交换链表中的节点(中等)
+* 环形链表(简单)
+* 环形链表II(中等)
+* K个一组翻转链表(困难)
+* 合并两个有序链表(简单)
+
+数组部分：
+
+* 移动零(简单)
+* 盛最多水的容器(中等)
+* 爬楼梯(中等)
+* 两数之和(简单)
+* 三数之和(中等)
+* 删除排序数组的重复项(简单)
+* 合并有序数组(简单)
+* 加一(简单)
+* 旋转数组(简单)
+
