@@ -8,23 +8,22 @@
 1. [数组、链表和跳表](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class1_ArrayAndLinked)
 2. [栈和队列(优先队列， 双端队列)](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class2_StackAndQueue)
 3. [ 哈希表、映射和集合](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class3_Hash_Map_Collections)
-4. 树、二叉树、二叉搜索树
-5. 泛型递归、树的递归
-6. 分治和回溯
-7. 深度优先和广度优先
-8. 贪心算法
-9. 二分查找
-10. 动态规划
-11. 字典树和并查集
-12. 高级搜索
-13. 红黑树和AVL树
-14. 位运算
-15. 布隆过滤和LRU缓存
-16. 排序算法
-17. 高级动态规划
-18. 字符串算法
-19. 大串讲
-20. 其他题目和总结
+4. [树、二叉树、二叉搜索树](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class4_Tree_BinaryTree_BinarySearch)
+5. [递归]()
+6. [分治和回溯]()
+7. [深度优先和广度优先]()
+8. [贪心算法]()
+9. [二分查找]()
+10. [动态规划和高级动态规划]()
+11. [字典树和并查集]()
+12. [高级搜索]()
+13. [红黑树和AVL树]()
+14. [位运算]()
+15. [布隆过滤和LRU缓存]()
+16. [排序算法]()
+17. [字符串算法]()
+18. [大串讲]()
+19. [其他题目和总结]()
 
 # 开始之前， 需要知道的 
 
