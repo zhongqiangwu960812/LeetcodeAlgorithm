@@ -9,7 +9,7 @@
 2. [栈和队列(优先队列， 双端队列)](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class2_StackAndQueue)
 3. [ 哈希表、映射和集合](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class3_Hash_Map_Collections)
 4. [树、二叉树、二叉搜索树](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class4_Tree_BinaryTree_BinarySearch)
-5. [递归、回溯和分治]()
+5. [递归、回溯和分治](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class5_Recursion_Retrospect_DivideConquer)
 6. [深度优先和广度优先]()
 7. [贪心算法]()
 8. [二分查找]()
