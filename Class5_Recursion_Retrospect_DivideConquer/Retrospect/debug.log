@@ -1,0 +1,3 @@
+[1012/081711.056:ERROR:settings.cc(430)] Settings version is not 5
+[1012/082711.070:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系统找不到指定的路径。 (0x3)
+[1014/081755.450:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系统找不到指定的路径。 (0x3)
