@@ -499,7 +499,6 @@ class Solution:
 
         res = []
         d = deque([root])
-        res.append([root.val])
         while d:
             size = len(d)       # 获取当前层的节点个数
             level = []
@@ -515,7 +514,7 @@ class Solution:
             
             res.append(level)
 
-        return res[1:]
+        return res
 ```
 
 这时候， 过程如下：
