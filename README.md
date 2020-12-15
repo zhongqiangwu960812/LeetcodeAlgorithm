@@ -10,7 +10,7 @@
 3. [ 哈希表、映射和集合](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class3_Hash_Map_Collections)
 4. [树、二叉树、二叉搜索树](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class4_Tree_BinaryTree_BinarySearch)
 5. [递归、回溯和分治](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class5_Recursion_Retrospect_DivideConquer)
-6. [深度优先和广度优先]()
+6. [深度优先和广度优先](https://github.com/zhongqiangwu960812/LeetcodeAlgorithm/tree/master/Class6_DFS_BFS)
 7. [贪心算法]()
 8. [二分查找]()
 9. [动态规划和高级动态规划]()
