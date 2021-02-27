@@ -703,6 +703,219 @@ class Solution:
         return min_cou
 ```
 
-
-
 ## [8. 会议室II(中等) -- 这个目前没解锁]
+
+## [9. 摆动序列(中等)](https://leetcode-cn.com/problems/wiggle-subsequence/)
+
+这个题目也可以采用贪心的思路， 首先还是先找局部极值点， 局部极值点的判断就是要么同时大于相邻两个数，要么同时小于相邻两个数。 整体最优， 整个序列有最多的局部极值点，局部最优推出全局最优，且找不到反例， 试试贪心
+
+![](https://img-blog.csdnimg.cn/20210216115850957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center)
+
+找极值点这里有个比较好的技巧就是从现在看过去， **当前这个$i$位置，其实是判断的$i-1$这个点是不是一个极值点**，这一点要注意。下面的代码我连极值点也顺便记录了下来：初识的`res=1`是默认了最右边那个点是峰值， 第一个点是不是峰值需要借助第二个点， 第二个点需要借助第三个点，依次类推，倒数第二个点需要借助倒数第一个点，而最后一个点默认是峰值。 上面图里面有个小错误，就是最后极值点8后面不应该有绿色的那个点了，这时候退出循环了。
+
+```python
+class Solution:
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        
+        if len(nums) < 2:
+            return len(nums)
+        
+        prediff, curdiff, res = 0, 0, 1
+        arr = [nums[0]]
+        
+        for i in range(1, len(nums)):
+            
+            # 计算当前的差值
+            curdiff = nums[i] - nums[i-1]
+            
+            # 如果发现当前的点是峰值(极大或者极小)， 那么就统计个数，顺便更新前一步的差值
+            if (curdiff > 0 and prediff <=0) or (curdiff < 0 and prediff >= 0):
+                res += 1
+                arr.append(nums[i])
+                prediff = curdiff
+        print(arr)
+        return res
+```
+
+## 10. [ 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)
+
+这里贪心思路关键是明白在哪里贪心了，这关系到找计算的起点，如果 -2 1 在一起，计算起点的时候，一定是从1开始计算，因为负数只会拉低总和，这就是贪心贪的地方！ 所以局部最优，就是当前“连续和”为负数的时候立刻放弃， 从下一个元素重新计算“连续和”， 因为负数加上下一个元素，“连续和”只会越来越小。 全局最优： 最大的连续和。 在局部最优的时候，只要记录最大的连续和，就能推出全局最优， 试试贪心。
+
+```python
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        
+        summ = 0
+        max_sum = float("-inf")
+        for i in range(len(nums)):
+            
+            summ += nums[i]
+            
+            if summ > max_sum:
+                max_sum = summ
+            
+            if summ < 0:         # 是负数了，重新开始计算
+                summ = 0
+        
+        return max_sum
+```
+
+## [11. K 次取反后最大化的数组和](https://leetcode-cn.com/problems/maximize-sum-of-array-after-k-negations/)
+
+第一款代码类似于暴力的解法， 每次取最小值，然后取反。
+
+```python
+import numpy as np
+
+class Solution:
+    def largestSumAfterKNegations(self, A: List[int], K: int) -> int:
+        
+        for i in range(K): 
+            # 对于每一次, 找最小的值，取负号
+            min_loc = np.argmin(A)
+            A[min_loc] *= -1
+        
+        return sum(A)
+```
+
+这个题目的贪心思路：
+
+贪心一： 找绝大值大的负数，然后取反变为整数， 贪心二： 如果都是正数了， 找数值最小的正数反转。
+
+```python
+class Solution:
+    def largestSumAfterKNegations(self, A: List[int], K: int) -> int:
+        
+        # 按照绝对值将数组排序 从大到小
+        A.sort(key=lambda x: abs(x), reverse=True)
+        
+        # 从头开始， 遇见负数就取反
+        for i in range(len(A)):
+            if A[i] < 0 and K > 0:
+                A[i] *= -1
+                K -= 1
+        
+        while K > 0:
+            A[-1] *= -1
+            K -= 1
+
+        return sum(A)
+```
+
+## [12. 加油站](https://leetcode-cn.com/problems/gas-station/)
+
+第一款代码， 类似于暴力的解法了，直接遍历每个位置作为初始位置， 对于每个初始位置， 尝试去走走看， 如果能够走回初始点，就返回，否则，停掉找下一个。 那么如何判断能不能走回初始点呢？  这里我用steps控制步子， 每一步都记录所剩的油， 如果发现油不够到下一站了，也就是当前的油不够当前的消耗， 就停掉。 具体代码如下：
+
+```python
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        # 尝试从头开始
+        for start_loc in range(len(gas)):
+            
+            # 如果开始的油不够消费， continue
+            if gas[start_loc] < cost[start_loc]:
+                continue
+            
+            # 从当前位置尝试走
+            cur_loc = start_loc
+            cur_gas = gas[cur_loc]
+            steps = 0
+            while steps < len(gas):
+
+                # 走一步
+                cost_gas = cost[cur_loc]
+                cur_loc = (cur_loc+1) % len(gas)
+                # 去掉消费，顺便加上油
+                cur_gas = cur_gas - cost_gas + gas[cur_loc]
+                
+                # 如果发现油不够走到下一站，停掉，也就是从当前位置无法走完
+                if cur_gas < cost[cur_loc]:
+                    break
+
+                steps += 1
+            
+            # 这里说明走完了, 即从该站出发能够走完
+            if steps == len(gas):
+                return start_loc
+                
+        return -1
+```
+
+这个的时间复杂度是O(n^2)， 两层循环。 这里再采用一种贪心的思路， 这个思路其实有点难理解的，看了几个题解之后， 还是感觉我自己创的这个有点好理解哈哈， 当然，不一定普适。要理解贪心的思路，首先要理解两点：
+
+1. 当前加油站能到下一个加油站的前提： **当前的油箱里的油还有剩余**， 因为要知道这个题目里面给定的两个数组， 其实这个索引对应不是当前对当前， 比如第$i$个加油站的时候， gas[i]表示在当前加油站能加多少油， 而cos[i]表示在当前加油站到下一加油站所耗费的油。所以从当前能到下一个加油站的前提就是当前的rest[i]要大于等于0才行。
+2. 全局的角度来看， 如果想从一个加油站开始， 经过途中不停的加油，放油过程， 再回到该加油站， 比如**要保证这个途中的总油量剩余始终大于或者等于0**， 否则一定会在中间某个站停掉。 原因就是因为上面那个1，因为小于0了之后，也就是油箱里的油没了，根本到不了下一站。
+
+所以这样，我们就可以采用贪心的思路，遍历所有的加油站，找到那个累积总油量达到最小的加油站， 让这个加油站的累积总油量大于或者等于0， 这时候就保证了这个途中的所有总油量剩余大于等于0， 这就说明**只要从它下面的那个加油站出发，就一定能走一圈回到下面的那个加油站**， 这句话要理解，因为在当前加油站总累计油量最小，但是还大于或者等于0， 说明能够到下一个加油站。**下一个加油站的位置即我们所求**。 这里面的贪心策略， 全局最优，其实就是找那个累积总油量达到最小的加油站，因为找到这个就找到了答案。 而局部最优就是每走个加油站，计算下累积总油量， 如果发现比之前的小，就更新下（找当前的最小)， 这样由局部最优可以找到全局最优，就可以试试贪心了。为了说明上面的这个思路，这里还画了两个图加以理解上面的过程，参考了后面一个题解。
+
+<img src="https://img-blog.csdnimg.cn/20210221120933371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center" style="zoom:70%;" />
+
+代码如下：
+
+```python
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        
+        cur_rest_acc = 0       # 当前剩余油量累计
+        min_rest_acc = float("inf")   # 记录剩余油量的最小值
+        min_rest_index = -1     # 记录剩余油量达到最小的那个位置
+        
+        # 下面开始从0点出发，记录各个加油站的累计剩余油量
+        for i in range(len(gas)):
+            
+            cur_rest_acc += gas[i] - cost[i]
+            
+            # 如果当前加油站的累计最小小于等于全局了， 更新它
+            if cur_rest_acc <= min_rest_acc:
+                min_rest_acc = cur_rest_acc
+                min_rest_index = i
+        
+        # 上面完了之后，就相当于找到了上面图里面的最低点以及对应的index，接下来两个判断
+        # 如果剩余油量累计小于0， 说明了跑一圈，总消耗大于总补给，从任何一个点就不可能跑下来，返回-1
+        if cur_rest_acc < 0:
+            return -1
+        
+        # 这里说明了一定能找到某个可以跑一圈的加油站了， 返回最低点的后面一个位置。
+        # 这里以防最后一个点是最低点，如果这个大于等于0，那么第一个加油站为起始点
+        return (min_rest_index+1) % len(gas)
+```
+
+##  [13.分发糖果](https://leetcode-cn.com/problems/candy/)
+
+这个题切记一定不要一下子就考虑两边， 直接考虑两边这个题目根本无从下手， 所以需要先考虑右边孩子比左边孩子评分更高的情况，如果高了， 就给右边的孩子提升糖果个数。  这时候局部最优是右边的孩子评分高，就增加糖果个数，全局最优是评分高的右孩子会比左孩子的糖果个数多。
+
+然后再考虑左边孩子比右边孩子评分更高的情况， 从后往前遍历， 如果发现左边孩子的评分高， 左边孩子的糖果数增加， 这样局部最优就是左边孩子评分高就增加糖果数，全局最优是保证评分高的左孩子会比右孩子的糖果数多。  
+
+通过上面这两次，就可以保证评分更高的孩子比两侧的邻位孩子都能获得更多的糖果了。
+
+具体过程就是先初始化一个糖果分发数组， 默认每个孩子都分1个糖果。 然后从左往右遍历，如果发现后面的孩子的评分比前一个孩子的高， 后一个孩子的糖果数要是前一个孩子的糖果数加1。 这样遍历完毕之后才能保证评分高的右孩子的糖果都比左边孩子多。 
+
+然后从右往左遍历， 如果发现前一个孩子的分数比后一个孩子的分数多， 这时候， 前一个孩子的糖果数**要是原先的糖果数和后一个孩子糖果数加1的最大值**， 这个算是个小坑， 因为这时候如果本身前面孩子的糖果数就多，就不用管了， 如果糖果数少的话才更新。 所以max操作可以实现这个目的。 最终candyassign数组就是分配的每个孩子的糖果数量了。
+
+具体代码如下：一次是前向遍历，一次是反向遍历
+
+```python
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        
+        # 初始的时候，每个孩子都会获得一个糖果
+        candyassign = [1 for i in range(len(ratings))]
+        candysadd = 0
+        
+        # 前向遍历， 如果发现后面的评分比前面的大，后面的孩子的糖果加1
+        for i in range(1, len(ratings)):
+            
+            if ratings[i] > ratings[i-1]:
+                candyassign[i] = candyassign[i-1] + 1
+        
+        # 后向遍历，如果发现前面的评分比后面的大， 前面孩子的糖果加1
+        for i in range(len(ratings)-2, -1, -1):
+            
+            if ratings[i] > ratings[i+1]:
+                candyassign[i] = max(candyassign[i], candyassign[i+1] + 1)
+        return sum(candyassign)
+```
+
+## [14. 根据身高重建队列](https://leetcode-cn.com/problems/queue-reconstruction-by-height/)
+
+这个具体的看博客上面的记录吧
